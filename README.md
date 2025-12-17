@@ -85,7 +85,7 @@ curl -k https://<EC2-PUBLIC-IP>:8443
 ## Screenshots
 
 ### 1. GitHub Actions workflow
-![GitHub Actions Workflow](screenshots/workflow.png)
+![GitHub Actions Workflow](GitHub Actions Workflow.png)
 
 ### 2. Browser TLS warning
 ![Browser TLS Warning](screenshots/browser_tls.png)
