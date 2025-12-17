@@ -98,6 +98,28 @@ curl -k https://<EC2-PUBLIC-IP>:8443
 
 
 
+## Problem Statement 2.1
+
+###How To Run :
+```
+chmod +x system_health_monitor.sh
+./system_health_monitor.sh
+```
+### Output : 
+![Wisecow App](screenshot/output1.png)
+
+## Problem Statement 2.2
+
+###How To Run:
+Install Dependencies
+
+### Output :
+![Wisecow App](screenshot/output2.png)
+
+
+
+
+
 
 
 
