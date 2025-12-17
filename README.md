@@ -106,7 +106,7 @@ chmod +x system_health_monitor.sh
 ./system_health_monitor.sh
 ```
 ### Output : 
-![Wisecow App](screenshot/output1.png)
+![Output_Problem_statement: 2.1](screenshot/output_1.png)
 
 ## Problem Statement 2.2
 
@@ -114,7 +114,7 @@ chmod +x system_health_monitor.sh
 Install Dependencies
 
 ### Output :
-![Wisecow App](screenshot/output2.png)
+![Output Problem statement: 2.2](screenshot/output_2.png)
 
 
 
