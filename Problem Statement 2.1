@@ -1,0 +1,42 @@
+1. System Health Monitoring Script: 
+Develop a script that monitors the health of a Linux system. It should check CPU usage, memory usage, disk space, and running processes. If any of these metrics exceed predefined thresholds (e.g., CPU usage > 80%), the script should send an alert to the console or a log file. 
+
+Code : 
+####################################################################################
+
+#!/bin/bash
+
+CPU_THRESHOLD=80
+MEM_THRESHOLD=80
+DISK_THRESHOLD=80
+
+LOG_FILE="system_health.log"
+DATE=$(date "+%Y-%m-%d %H:%M:%S")
+
+CPU_USAGE=$(top -bn1 | grep "Cpu(s)" | awk '{print $2 + $4}')
+
+MEM_USAGE=$(free | awk '/Mem/ {printf("%.0f"), $3/$2 * 100}')
+
+DISK_USAGE=$(df / | awk 'NR==2 {print $5}' | sed 's/%//')
+
+echo "[$DATE] CPU: $CPU_USAGE% | MEM: $MEM_USAGE% | DISK: $DISK_USAGE%" >> $LOG_FILE
+
+if [ ${CPU_USAGE%.*} -gt $CPU_THRESHOLD ]; then
+    echo "[$DATE] ALERT: High CPU usage - $CPU_USAGE%" >> $LOG_FILE
+fi
+
+if [ $MEM_USAGE -gt $MEM_THRESHOLD ]; then
+    echo "[$DATE] ALERT: High Memory usage - $MEM_USAGE%" >> $LOG_FILE
+fi
+
+if [ $DISK_USAGE -gt $DISK_THRESHOLD ]; then
+    echo "[$DATE] ALERT: High Disk usage - $DISK_USAGE%" >> $LOG_FILE
+fi
+######################################################################################
+
+
+
+
+
+
+
