@@ -1,28 +1,115 @@
-# Cow wisdom web server
+# Wisecow Application
+
+## Overview
+
+Wisecow is a simple Bash-based web application that displays a random fortune using `cowsay`.  
+This project demonstrates:
+
+- Docker containerization
+- Kubernetes deployment (Kind cluster on EC2)
+- Secure TLS communication via NGINX Ingress
+- CI/CD using GitHub Actions
+
+---
+
+## Repository Structure
+
+wisecow/
+├── wisecow.sh
+├── Dockerfile
+├── deployment.yaml
+├── service.yaml
+├── ingress.yaml
+├── .github/workflows/ci-cd.yml
+└── README.md
+
+
+All Kubernetes manifests are in the root directory.
+
+---
 
 ## Prerequisites
 
+- Docker installed on your local machine or EC2
+- Kind cluster running
+- Bash, cowsay, fortune (installed in Docker image)
+- GitHub repository with secrets configured (Docker Hub)
+
+---
+
+## Dockerization
+
+Dockerfile build
+
+Docker image is pushed to Docker Hub:
 ```
-sudo apt install fortune-mod cowsay -y
+unicron28/wisecow:latest
 ```
 
-## How to use?
+## Kubernetes Deployment
 
-1. Run `./wisecow.sh`
-2. Point the browser to server port (default 4499)
+Deployment: Runs Wisecow container
+Service: Exposes the app on port 4499
+Ingress: Provides HTTPS access with TLS
+TLS is handled with a self-signed certificate. Browser shows a security warning which confirms HTTPS.
 
-## What to expect?
-![wisecow](https://github.com/nyrahul/wisecow/assets/9133227/8d6bfde3-4a5a-480e-8d55-3fef60300d98)
+## CI/CD Pipeline
 
-# Problem Statement
-Deploy the wisecow application as a k8s app
+GitHub Actions workflow performs:
+  1. Checkout repository
+  2. Docker login
+  3. Build Docker image using Buildx and QEMU
+  4. Push image to Docker Hub
+  5. Deploy to Kubernetes cluster (self-hosted runner on EC2)
 
-## Requirement
-1. Create Dockerfile for the image and corresponding k8s manifest to deploy in k8s env. The wisecow service should be exposed as k8s service.
-2. Github action for creating new image when changes are made to this repo
-3. [Challenge goal]: Enable secure TLS communication for the wisecow app.
+Secrets used:
+```
+DOCKERHUB_USERNAME
+DOCKERHUB_TOKEN
+```
+## Accessing Wisecow
 
-## Expected Artifacts
-1. Github repo containing the app with corresponding dockerfile, k8s manifest, any other artifacts needed.
-2. Github repo with corresponding github action.
-3. Github repo should be kept private and the access should be enabled for following github IDs: nyrahul
+Open browser:
+```
+https://<EC2-PUBLIC-IP>:9000
+```
+
+You will see a security warning (self-signed TLS)
+Proceed anyway → application loads with cow + fortune
+
+Terminal alternative:
+```
+curl -k https://<EC2-PUBLIC-IP>:8443
+```
+
+## Screenshots
+
+### 1. GitHub Actions workflow
+![GitHub Actions Workflow](screenshots/workflow.png)
+
+### 2. Browser TLS warning
+![Browser TLS Warning](screenshots/browser_tls.png)
+
+### 3. Wisecow app running over HTTPS
+![Wisecow App](screenshots/wisecow_app.png)
+
+### 3. Wisecow app running over Terminal
+![Wisecow App](screenshots/wisecow_app.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
