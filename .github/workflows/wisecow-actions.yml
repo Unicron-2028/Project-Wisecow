@@ -18,11 +18,14 @@ jobs:
         with:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.TOKEN }}
-
-      - name: Build Docker image
-        run: |
-          docker build -t ${{ secrets.USERNAME }}/wisecow:latest .
-
-      - name: Push Docker image
-        run: |
-          docker push ${{ secrets.USERNAME }}/wisecow:latest
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build and Push Docker image
+        uses: docker/build-push-action@v6
+        with:
+         context: .
+         push: true
+         tags: unicron28/wisecow:latest
+         file: ./Dockerfile
