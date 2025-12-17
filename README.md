@@ -85,16 +85,16 @@ curl -k https://<EC2-PUBLIC-IP>:8443
 ## Screenshots
 
 ### 1. GitHub Actions workflow
-![GitHub Actions Workflow](GitHub Actions Workflow.png)
+![GitHub Actions Workflow](screenshot/SS1.png)
 
 ### 2. Browser TLS warning
-![Browser TLS Warning](screenshots/browser_tls.png)
+![Browser TLS Warning](screenshot/ss3.png)
 
 ### 3. Wisecow app running over HTTPS
-![Wisecow App](screenshots/wisecow_app.png)
+![Wisecow App](screenshot/ss2.png)
 
 ### 3. Wisecow app running over Terminal
-![Wisecow App](screenshots/wisecow_app.png)
+![Wisecow App](screenshot/ss4.png)
 
 
 
