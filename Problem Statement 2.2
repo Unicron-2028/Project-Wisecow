@@ -1,0 +1,35 @@
+4. Application Health Checker: 
+Please write a script that can check the uptime of an application and determine if it is functioning correctly or not. The script must accurately assess the application's status by checking HTTP status codes. It should be able to detect if the application is 'up', meaning it is functioning correctly, or 'down', indicating that it is unavailable or not responding.
+
+########################################################################
+
+import requests
+import time
+from datetime import datetime
+
+def check_application_health(url):
+    try:
+        response = requests.get(url, timeout=10)
+        if response.status_code >= 200 and response.status_code < 300:
+            return True, response.status_code
+        else:
+            return False, response.status_code
+            
+    except requests.exceptions.RequestException as e:
+        return False, str(e)
+
+def monitor(url, interval=60):
+    print(f"--- Monitoring started for: {url} ---")
+    try:
+        while True:
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            is_up, detail = check_application_health(url)
+            status = "UP" if is_up else "DOWN"
+            print(f"[{timestamp}] Status: {status} | Detail: {detail}")
+            time.sleep(interval)
+    except KeyboardInterrupt:
+        print("\nMonitoring stopped by user.")
+if __name__ == "__main__":
+    APP_URL = "https://www.google.com" 
+    monitor(APP_URL, interval=10)
+############################################################################
